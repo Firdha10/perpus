@@ -88,7 +88,7 @@ $(document).ready(function() {
                                 <select name="jurusan_id" required="" class="form-control">
                                     <option value=''>--- Pilih Jurusan ---</option>
                                     @foreach($u as $list)
-                                        <option value="{{ $list['id'] }}"> {{$list->jurusan_id}} </option>
+                                        <option value="{{ $list['id'] }}"> {{$list->jurusan}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -98,9 +98,9 @@ $(document).ready(function() {
                             <label for="user_id" class="col-md-4 control-label">User Login</label>
                             <div class="col-md-6">
                             <select class="form-control" name="user_id" required="">
-                                <option value="">--- Pilih User ---</option>
+                                <option value="">--- Pilih Email User ---</option>
                                 @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    <option value="{{$user->id}}">{{$user->email}}</option>
                                 @endforeach
                             </select>
                             </div>
