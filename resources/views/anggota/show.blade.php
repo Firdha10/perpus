@@ -1,4 +1,4 @@
-z@section('js')
+@section('js')
 
 <script type="text/javascript">
 
