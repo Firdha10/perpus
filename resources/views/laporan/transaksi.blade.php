@@ -9,7 +9,9 @@
 </script>
 @stop
 @extends('layouts.app')
-
+@section('title')
+    Laporan Transaksi
+@endsection
 @section('content')
 <div class="row">
 
