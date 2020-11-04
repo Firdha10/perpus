@@ -63,34 +63,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row justify-content-center  wow bounceInUp card-col-2" style=" animation-delay : 500ms ">
-            <div class="col-lg-4 col-md-4 col-12">
-                <div class="card" style="margin-top:100px">
-                    <div class="card-body">
-                        <h5 class="card-title">Pengajar Banyak</h5>
-                        <p class="card-text">Ketersediaan pengajar kami banyak, sehingga bisa mencari pengajar yang
-                            cocok
-                            dengan anak.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <div class="card" style="margin-top:100px">
-                    <div class="card-body">
-                        <h5 class="card-title">Murah</h5>
-                        <p class="card-text">Akumulasi biaya relatif murah.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-                <div class="card" style="margin-top:100px">
-                    <div class="card-body">
-                        <h5 class="card-title">Penyesuaian Jadwal</h5>
-                        <p class="card-text">Jadwal penyesuaian dengan permintaan Ayah dan Bunda.</p>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </section>
 

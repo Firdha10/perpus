@@ -64,3 +64,45 @@
 .success{
     background-color: #5e30c1;
 }
+
+/* Tablet Style */
+@media only screen and (min-width : 651px) and (max-width: 960px){
+
+    .choose {
+        height: max-content;
+        background: white;
+    }
+    .choose h4 {
+        top: 860px;
+        position: absolute;
+        font-size: 38px;
+        line-height: 42px;
+        color: #08419A;
+    }
+
+    .choose h4::after {
+        content: '';
+        display: block;
+        border-bottom: 4px solid #08419A;
+        width: 50px;
+    }
+
+    .choose .card {
+        background-color: #F5F7F8;
+        border-radius: 6px;
+        box-shadow: 0 0 20px hsl(0, 0%, 87%);
+        border: none;
+        width: 200px;
+        height: 500px;
+    }
+
+    .choose .col-3 {
+        margin-right: 60px;
+    }
+    .choose .card-title {
+        font-weight: 800;
+        font-size: 20px;
+        margin-bottom: 25px
+    }
+
+}
