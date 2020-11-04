@@ -182,7 +182,7 @@ public function transaksiExcel(Request $request)
         });
 
          $datasheet = array();
-         $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "BUKU", "PEMINJAM",  "TANGGAL PINJAM","TANGGAL KEMBALI","STATUS", "KETERANGAN");
+         $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "BUKU", "PEMINJAM",  "TGL PINJAM","TGL KEMBALI","STATUS", "KET");
          $i=1;
 
         foreach ($datas as $data) {
@@ -204,7 +204,7 @@ public function transaksiExcel(Request $request)
         $sheet->fromArray($datasheet);
     });
 
-})->export('xls');
+    })->export('xls');
 
 }
 }

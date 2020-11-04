@@ -75,7 +75,7 @@
                     @endif
                       {{$data->judul}}
                   </td>
-                  <td>{{$data->lokasi}}</td>
+                  <td>Rak {{$data->lokasi}}</td>
                   <td style="text-align:center;">
                     <div class="btn-group">
                       <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('buku.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>
