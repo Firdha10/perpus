@@ -23,13 +23,12 @@ class CreateBukusTable extends Migration
             $table->foreign('rak_id')->references('id')->on('raks')->onDelete('cascade');
             $table->integer('jenis_id')->unsigned();
             $table->foreign('jenis_id')->references('id')->on('jenisbukus')->onDelete('cascade');
+            $table->string('judul', 100);
             $table->string('jumlah_buku', 20)->nullable();
             $table->string('isbn', 20)->nullable();
             $table->string('tahun_terbit', 20)->nullable();
             $table->text('deskripsi')->nullable();
             $table->string('cover', 100)->nullable();
-            $table->enum('jk', ['L', 'P']);
-            $table->text('alamat', 25);
             $table->timestamps();
         });
     }
