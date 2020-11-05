@@ -25,7 +25,7 @@ $(document).ready(function() {
                       <form class="forms-sample">
                         <div class="form-group">
                             <div class="col-md-6">
-                                <img class="product" width="200" height="200" @if($data->user->gambar) src="{{ asset('images/user/'.$data->user->gambar) }}" @endif />
+                                <img class="product" width="200" height="200" @if($data->user->gambar) src="{{ asset('images/user/'.$data->user->gambar) }}" @else src="{{ asset('images/user/default.png') }}" @endif />
                             </div>
                         </div>
 
