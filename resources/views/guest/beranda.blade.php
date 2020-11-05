@@ -38,7 +38,7 @@
             Ayo Bergabung Dengan SIPERPUS
         </h4>
         <div class="row justify-content-center wow bounceInUp card-col">
-            <div class="col-lg-4 col-md-4 col-12">
+            <div class="col-lg-4 col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"> Koleksi SIPERPUS</h5>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-12">
+            <div class="col-lg-4 col-md-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Fasilitas SIPERPUS</h5>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="col-lg-4 col-md-4 col-12">
+            <div class="col-lg-4 col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Pelayanan SIPERPUS</h5>
