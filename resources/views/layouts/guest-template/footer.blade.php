@@ -15,9 +15,7 @@
                             </div>
                             <div class="col-md-4">
                                 <h4> Kontak </h4>
-                                <ul>
-                                    <li>0541-7777769</li>
-                                </ul>
+                                <p>0541-7777769</p>
                             </div>
                             <div class="col-md-4">
                                 <h4> Visit Us </h4>
