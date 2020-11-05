@@ -212,4 +212,7 @@
     .information .col-md-4{
         padding-top: 0px;
     }
+    .information a {
+        padding-bottom: 0px;
+    }
 }
