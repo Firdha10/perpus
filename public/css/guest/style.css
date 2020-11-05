@@ -194,11 +194,19 @@
         width: 100px;
     }
     .information {
-        min-height: 210px;
+        margin-top: 250px;
+        max-height: max-content;
+        padding-top: 0px;
     }
 
     .information img {
         width:40px;
         height:40px;
+    }
+    .information .row{
+        padding-top: 20px;
+    }
+    .information .lokasi{
+        padding-top: 0px;
     }
 }

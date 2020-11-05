@@ -8,7 +8,7 @@
                         <p>Copyright 2020 SMKN 7 SMD</p>
                     </div>
                     <div class="col-md-7">
-                        <div class="row">
+                        <div class="row lokasi">
                             <div class="col-md-4 social-links">
                                 <h4 class="label-lokasi"> Location </h4>
                                 <p class="isi-lokasi">Jl. Aminah Syukur No.82, Sungai Pinang Luar, Kec. Samarinda Kota, Kota Samarinda</p>
