@@ -76,8 +76,8 @@ class AnggotaController extends Controller
 
         Anggota::create($request->all());
 
-        alert()->success('Berhasil.','Data telah ditambahkan!');
-        return redirect()->route('anggota.index');
+    
+        return redirect()->route('anggota.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }
 
@@ -129,8 +129,7 @@ class AnggotaController extends Controller
     {
         Anggota::find($id)->update($request->all());
 
-        alert()->success('Berhasil.','Data telah diubah!');
-        return redirect()->to('anggota');
+        return redirect()->to('anggota')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 
     /**
@@ -142,7 +141,6 @@ class AnggotaController extends Controller
     public function destroy($id)
     {
         Anggota::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
-        return redirect()->route('anggota.index');
+        return redirect()->route('anggota.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
     }
 }

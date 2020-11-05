@@ -29,8 +29,7 @@ class RakController extends Controller
     public function destroy($id)
     {
         Rak::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
-        return redirect()->route('rak.index');
+        return redirect()->route('rak.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
     }
 
     public function create()
@@ -59,8 +58,7 @@ class RakController extends Controller
 
         Rak::create($request->all());
 
-        alert()->success('Berhasil.','Data telah ditambahkan!');
-        return redirect()->route('rak.index');
+        return redirect()->route('rak.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }
     public function edit($id)
@@ -87,8 +85,7 @@ class RakController extends Controller
         Rak::find($id)->update([
              'lokasi' => $request->get('lokasi')
         ]);
-
-        alert()->success('Berhasil.','Data telah diubah!');
-        return redirect()->route('rak.index');
+        
+        return redirect()->route('rak.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 }

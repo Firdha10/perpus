@@ -105,8 +105,7 @@ class TransaksiController extends Controller
                             'jumlah_buku' => ($transaksi->buku->jumlah_buku - 1),
                             ]);
 
-        alert()->success('Berhasil.','Data telah ditambahkan!');
-        return redirect()->route('transaksi.index');
+        return redirect()->route('transaksi.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }
 
@@ -169,8 +168,7 @@ class TransaksiController extends Controller
                             'jumlah_buku' => ($transaksi->buku->jumlah_buku + 1),
                             ]);
 
-        alert()->success('Berhasil.','Data telah diubah!');
-        return redirect()->route('transaksi.index');
+        return redirect()->route('transaksi.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 
     /**
@@ -182,7 +180,6 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         Transaksi::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
-        return redirect()->route('transaksi.index');
+        return redirect()->route('transaksi.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
     }
 }

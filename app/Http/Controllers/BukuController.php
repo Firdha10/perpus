@@ -138,9 +138,7 @@ class BukuController extends Controller
                 'cover' => $cover
             ]);
 
-        alert()->success('Berhasil.','Data telah ditambahkan!');
-
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }
 
@@ -212,7 +210,7 @@ class BukuController extends Controller
                 ]);
 
         alert()->success('Berhasil.','Data telah diubah!');
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 
     /**
@@ -224,7 +222,6 @@ class BukuController extends Controller
     public function destroy($id)
     {
         Buku::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
     }
 }

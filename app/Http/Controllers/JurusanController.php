@@ -53,8 +53,7 @@ class JurusanController extends Controller
 
         Jurusan::create($request->all());
 
-        alert()->success('Berhasil.','Data telah ditambahkan!');
-        return redirect()->route('jurusan.index');
+        return redirect()->route('jurusan.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }
 
@@ -74,15 +73,12 @@ class JurusanController extends Controller
         Jurusan::find($id)->update([
              'jurusan' => $request->get('jurusan')
         ]);
-
-        alert()->success('Berhasil.','Data telah diubah!');
-        return redirect()->route('jurusan.index');
+        return redirect()->route('jurusan.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 
     public function destroy($id)
     {
         Jurusan::find($id)->delete();
-        alert()->success('Berhasil.','Data telah dihapus!');
-        return redirect()->route('jurusan.index');
+        return redirect()->route('jurusan.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
     }
 }

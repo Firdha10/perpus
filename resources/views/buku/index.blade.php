@@ -43,10 +43,9 @@
   <div class="col-lg-2">
     <a href="{{ route('buku.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Buku</a>
   </div>
+  <br><br>
   <div class="col-lg-12">
-    @if (Session::has('message'))
-      <div class="alert alert-{{ Session::get('message_type') }}" id="waktu2" style="margin-top:10px;">{{ Session::get('message') }}</div>
-    @endif
+    @include('layouts.alert-messages')
   </div>
 </div>
 <div class="row" style="margin-top: 20px;">

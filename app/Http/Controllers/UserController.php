@@ -88,9 +88,7 @@ class UserController extends Controller
             'gambar' => $gambar
         ]);
 
-        Session::flash('message', 'Berhasil ditambahkan!');
-        Session::flash('message_type', 'success');
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }
 
@@ -163,9 +161,8 @@ class UserController extends Controller
 
         $user_data->update();
 
-        Session::flash('message', 'Berhasil diubah!');
-        Session::flash('message_type', 'success');
-        return redirect()->to('user');
+        
+        return redirect()->to('user')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 
     /**
