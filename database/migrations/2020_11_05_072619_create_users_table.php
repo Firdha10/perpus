@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransaksisTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateTransaksisTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kode_transaksi', 20);
+            $table->string('email', 20);
+            $table->string('password',10);
+            $table->string('gambar', 100)->nullable();
+            $table->enum('level', ['admin', 'user']);
             $table->integer('anggota_id')->unsigned();
             $table->foreign('anggota_id')->references('id')->on('anggota')->onDelete('cascade');
-            $table->date('tgl_pinjam');
-            $table->date('tgl_kembali');
-            $table->enum('status', ['pinjam', 'kembali']);
-            $table->text('ket')->nullable();
-            $table->timestamps();        
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
@@ -33,6 +33,6 @@ class CreateTransaksisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi');
+        Schema::dropIfExists('users');
     }
 }

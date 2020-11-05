@@ -14,22 +14,20 @@ class CreateAnggotasTable extends Migration
     public function up()
     {
         Schema::create('anggota', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('no_identitas');
-            $table->string('nama');
-            $table->string('tempat_lahir')->nullable();
+            $table->increments('id');
+            $table->string('no_identitas', 20);
+            $table->string('nama', 25);
+            $table->string('no_telp', 15);
+            $table->string('tempat_lahir', 20)->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->enum('jk', ['L', 'P']);
-            $table->integer('jurusan_id')->unsigned();
-            $table->foreign('jurusan_id')->references('id')->on('jurusans');
+            $table->text('alamat', 25);
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.cre
      *
      * @return void
      */

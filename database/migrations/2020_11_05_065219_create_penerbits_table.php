@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJurusansTable extends Migration
+class CreatePenerbitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateJurusansTable extends Migration
      */
     public function up()
     {
-        Schema::create('jurusans', function (Blueprint $table) {
+        Schema::create('penerbits', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('jurusan');
+            $table->string('penerbit', '20');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateJurusansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jurusans');
+        Schema::dropIfExists('penerbits');
     }
 }

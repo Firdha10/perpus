@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFaqsTable extends Migration
+class CreatePengarangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateFaqsTable extends Migration
      */
     public function up()
     {
-        Schema::create('faqs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('judul', 30);
-            $table->text('deskripsi');
+        Schema::create('pengarangs', function (Blueprint $table) {
+            $table->increments('id', 5);
+            $table->string('nama', 20);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateFaqsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faqs');
+        Schema::dropIfExists('pengarangs');
     }
 }

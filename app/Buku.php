@@ -7,18 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 class Buku extends Model
 {
     protected $table = 'buku';
-    protected $fillable = ['judul', 'isbn', 'penerbit', 'pengarang', 'tahun_terbit', 'jumlah_buku', 'lokasi', 'deskripsi', 'cover'];
+    protected $fillable = ['judul', 'isbn', 'penerbit_id', 'pengarang_id', 'tahun_terbit', 'jumlah_buku', 'rak_id', 'jenis_id','deskripsi', 'cover'];
 
     /**
      * Method One To Many 
      */
-    public function transaksi()
+    public function details()
     {
-    	return $this->hasMany(Transaksi::class);
+    	return $this->hasMany(DetailTransaksi::class);
     }
 
-    public function lokasi() 
+    public function rak() 
     {
-        return $this->belongsTo(Rak::class, 'lokasi');
+        return $this->belongsTo(Rak::class, 'rak_id');
+    }
+    public function penerbit() 
+    {
+        return $this->belongsTo(Penerbit::class, 'penerbit_id');
+    }
+    public function pengarang() 
+    {
+        return $this->belongsTo(Pengarang::class, 'pengarang_id');
+    }
+    public function jenis() 
+    {
+        return $this->belongsTo(JenisBuku::class, 'jenis_id');
     }
 }

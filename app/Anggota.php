@@ -7,21 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Anggota extends Model
 {
 	protected $table = 'anggota';
-    protected $fillable = ['user_id', 'no_identitas', 'nama', 'tempat_lahir', 'tgl_lahir', 'jk', 'jurusan_id'];
+    protected $fillable = ['no_identitas', 'nama', 'tempat_lahir', 'tgl_lahir', 'jk', 'no_telp', 'alamat'];
 
 
     /**
      * Method One To One 
      */
-    public function user()
-    {
-    	return $this->belongsTo(User::class);
-    }
-
-    public function jurusan() 
-    {
-        return $this->belongsTo(Jurusan::class, 'jurusan_id');
-    }
 
     /**
      * Method One To Many 
@@ -29,5 +20,9 @@ class Anggota extends Model
     public function transaksi()
     {
     	return $this->hasMany(Transaksi::class);
+    }
+    public function anggota()
+    {
+        return $this->hasMany(Anggota::class);
     }
 }
