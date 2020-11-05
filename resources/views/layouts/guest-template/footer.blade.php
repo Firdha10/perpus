@@ -18,9 +18,9 @@
                         </div>
                         <div class="col-md-4">
                             <h4> Visit Us </h4>
-                            <a href="https://www.instagram.com/smkn7_smr"><i style="font-size: 1rem;" class="fa fa-instagram text-white "></i></a>
-                            <a href="https://www.twitter.com/SMKN7Samarinda"><i style="font-size: 1rem;" class="fa fa-twitter text-white "></i></a>
-                            <a href="https://www.smkn7-smr.sch.id"><i style="font-size: 1rem;" class="fa fa-globe text-white "></i></a>
+                            <a href="https://www.instagram.com/smkn7_smr"><i class="fa fa-instagram text-white "></i></a>
+                            <a href="https://www.twitter.com/SMKN7Samarinda"><i class="fa fa-twitter text-white "></i></a>
+                            <a href="https://www.smkn7-smr.sch.id"><i class="fa fa-globe text-white "></i></a>
                         </div>
                     </div>
                 </div>
