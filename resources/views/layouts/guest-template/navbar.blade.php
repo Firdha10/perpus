@@ -9,6 +9,7 @@
                 <li class="nav-item"><a href="{{url('/')}}" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="{{url('/daftar')}}" class="nav-link">Registrations</a></li>
                 <li class="nav-item"><a href="{{url('/faqs')}}" class="nav-link">FAQ</a></li>
+                <li class="nav-item d-lg-none d-md-block"><a href="{{ route('login') }}" class="nav-link smooth" target="_blank">Login</a></li>
             </ul>
             <ul class="navbar-nav ml-auto align-items-lg-center d-none d-lg-block">
                 <li class="ml-lg-3 nav-item">
