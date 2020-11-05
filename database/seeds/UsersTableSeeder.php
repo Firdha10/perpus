@@ -13,11 +13,12 @@ class UsersTableSeeder extends Seeder
     {
        \App\User::insert([
             [
-              'id'  			=> 1,
-              'email' 			=> 'admin@perpus.com',
-              'password'		=> bcrypt('123123'),
-              'gambar'			=> NULL,
-              'level'			=> 'admin',
+              'id'            => 1,
+              'email' 			  => 'admin@perpus.com',
+              'password'		  => bcrypt('123123'),
+              'gambar'			  => NULL,
+              'level'			    => 'admin',
+              'anggota_id'    => 1,
               'remember_token'	=> NULL,
               'created_at'      => \Carbon\Carbon::now(),
               'updated_at'      => \Carbon\Carbon::now()
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder
               'password'		=> bcrypt('123123'),
               'gambar'			=> NULL,
               'level'			=> 'user',
+              'anggota_id'    => 2,
               'remember_token'	=> NULL,
               'created_at'      => \Carbon\Carbon::now(),
               'updated_at'      => \Carbon\Carbon::now()

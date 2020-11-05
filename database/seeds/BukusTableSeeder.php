@@ -13,18 +13,21 @@ class BukusTableSeeder extends Seeder
     {
         \App\Buku::insert([
             [
-              'id'  			=> 1,
-              'judul'  			=> 'Matematika Dasar Teori dan Aplikasi Praktis Edisi Ketiga',
-              'isbn'			=> '9920392749',
-              'pengarang' 		=> 'John Bird',
-              'penerbit'		=> 'Erlangga',
-              'tahun_terbit'	=> 2004,
+              'id'  			    => 1,
+              'penerbit_id'   => 1,
+              'pengarang_id'  => 1,
+              'rak_id'			  => 1,
+              'jenis_id'      => 1,
               'jumlah_buku'		=> 20,
-              'deskripsi'		=> 'Buku Matematika Dasar Teori dan Aplikasi Praktis Edisi Ketiga',
-              'lokasi'			=> 1,
-              'cover'			=> 'mtk.jpeg',
-              'created_at'      => \Carbon\Carbon::now(),
-              'updated_at'      => \Carbon\Carbon::now()
+              'judul'  			  => 'Matematika Dasar Teori dan Aplikasi Praktis Edisi Ketiga',
+              'isbn'			    => '9920392749',
+              'pengarang' 		=> 'John Bird',
+              'penerbit'	   	=> 'Erlangga',
+              'tahun_terbit'	=> 2004,
+              'deskripsi'		  => 'Buku Matematika Dasar Teori dan Aplikasi Praktis Edisi Ketiga',
+              'cover'			    => 'mtk.jpeg',
+              'created_at'    => \Carbon\Carbon::now(),
+              'updated_at'    => \Carbon\Carbon::now()
             ],
             [
               'id'  			=> 2,

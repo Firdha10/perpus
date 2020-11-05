@@ -59,7 +59,6 @@
               <tr>
                 <th>Nama</th>
                 <th>Nomor Identitas</th>
-                <th>Jurusan</th>
                 <th>Jenis Kelamin</th>
                 <th style="text-align:center;">Aksi</th>
               </tr>
@@ -76,7 +75,6 @@
                       {{$data->nama}}
                   </td>
                   <td>{{$data->no_identitas}}</td>
-                  <td>{{$data->jurusan->jurusan ?? null}}</td>
                   <td>{{$data->jk === "L" ? "Laki - Laki" : "Perempuan"}}</td>
                   <td style="text-align:center;">
                     <div class="btn-group">
