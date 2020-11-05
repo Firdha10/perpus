@@ -120,6 +120,20 @@
 	text-decoration: none;
 	color: #fff;
 }
+.partner .row{
+    padding-left:100px;
+}
+.partner img{
+    height:170px; 
+    width:170px;
+}
+.partner .images{
+    height:200px; 
+    width:200px;
+}
+.partner h3{
+    text-align:center;
+}
 
 /* Tablet Style */
 @media only screen and (min-width : 651px) and (max-width: 960px){
@@ -160,6 +174,31 @@
         font-size: 20px;
         margin-bottom: 25px
     }
-
+    .partner .row{
+        padding-left:0px;
+    }
     
+    
+}
+/* Phone Style */
+@media (max-width: 650px) {
+    .partner .row{
+        padding-left:0px;
+    }
+    .partner img{
+        height: 100px;
+        width: 100px;
+    }
+    .partner .images{
+        height: 100px;
+        width: 100px;
+    }
+    .information {
+        min-height: 210px;
+    }
+
+    .information img {
+        width:40px;
+        height:40px;
+    }
 }

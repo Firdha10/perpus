@@ -20,14 +20,14 @@
             </div>
         </div>
     </div>
-    <div class="callout container">
+    <div class="callout container partner">
         <h3 style="text-align:center;">OUR PARTNERSHIP</h3>
-        <div class="row mt-lg-5 mt-5 justify-content-center" style="padding-left:100px;">
+        <div class="row mt-lg-5 mt-5 justify-content-center">
             <div class="col-lg-4 col-6 col-md-4">
-                <img src="{{asset('images/guest/smakenjuh.png')}}" alt="" style="height:170px; width:170px;">
+                <img src="{{asset('images/guest/smakenjuh.png')}}" alt="">
             </div>
             <div class="col-lg-4 col-6 col-md-4">
-                <img src= "{{asset('images/OPAC.png')}} " alt="" style="height:200px; width:200px;">
+                <img src= "{{asset('images/OPAC.png')}} " alt="" class="images">
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-4 social-links">
                                 <h4 class="label-lokasi"> Location </h4>
-                                <p class="isi-lokasi">Jl. Aminah Syukur No.82, Sungai Pinang Luar, Kec. Samarinda Kota, Kota Samarinda, Kalimantan Timur 75113</p>
+                                <p class="isi-lokasi">Jl. Aminah Syukur No.82, Sungai Pinang Luar, Kec. Samarinda Kota, Kota Samarinda</p>
                             </div>
                             <div class="col-md-4">
                                 <h4> Kontak </h4>
