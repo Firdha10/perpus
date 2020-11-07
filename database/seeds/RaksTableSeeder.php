@@ -11,7 +11,7 @@ class RaksTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Penerbit::insert([
+        \App\Rak::insert([
             [
                 'id'  			=> 1,
                 'lokasi'  	    => '1',

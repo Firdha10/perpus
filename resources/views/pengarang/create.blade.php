@@ -11,10 +11,10 @@ $(document).ready(function() {
 
 @extends('layouts.app')
 @section('title')
-    Tambah Jurusan
+    Tambah Pengarang
 @endsection
 @section('content')
-<form method="POST" action="{{ route('jurusan.store') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('pengarang.store') }}" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-12 d-flex align-items-stretch grid-margin">
@@ -22,14 +22,14 @@ $(document).ready(function() {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Tambah Jurusan</h4>
-                            <div class="form-group{{ $errors->has('jurusan') ? ' has-error' : '' }}">
-                                <label for="jurusan" class="col-md-4 control-label">Jurusan</label>
+                            <h4 class="card-title">Tambah Pengarang</h4>
+                            <div class="form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
+                                <label for="nama" class="col-md-4 control-label">Pengarang</label>
                                 <div class="col-md-6">
-                                    <input id="jurusan" type="text" class="form-control" name="jurusan" value="{{ old('jurusan') }}" required>
-                                    @if ($errors->has('jurusan'))
+                                    <input id="nama" type="text" class="form-control" name="nama" value="{{ old('nama') }}" required autocomplete="off">
+                                    @if ($errors->has('nama'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('jurusan') }}</strong>
+                                            <strong>{{ $errors->first('nama') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -37,7 +37,7 @@ $(document).ready(function() {
                             <button type="submit" class="btn btn-primary" id="submit">
                                 Simpan
                             </button>
-                            <a href="{{route('jurusan.index')}}" class="btn btn-danger">Kembali</a>
+                            <a href="{{route('pengarang.index')}}" class="btn btn-danger">Kembali</a>
                         </div>
                     </div>
                 </div>

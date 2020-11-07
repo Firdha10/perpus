@@ -57,6 +57,26 @@
                                 </div>   
                             </div>
                             <div class="row mb-4">
+                                <div class="col-lg-6">
+                                    <p>Foto*</p>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id= "gambar" required name= "gambar" class="custom-file-input" id="inputGroupFile01" value="{{isset($insert) ? $insert->file : ''}}">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <p>*</p>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" id= "gambar" required name= "gambar" class="custom-file-input" id="inputGroupFile01" value="{{isset($insert) ? $insert->file : ''}}">
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
                                 <div class="col-lg-6 {{ $errors->has('password') ? ' has-error' : '' }}">
                                     <p>Password*</p>
                                     <input id="password" type="password" class="form-control" onkeyup='check();' name="password" required>
@@ -67,19 +87,10 @@
                                     @endif
                                 </div>
                                 <div class="col-lg-6">
-                                <br>
+                                    <br>
                                     <label for="password-confirm" class="col-md-6 control-label">Confirm Password*</label>
                                     <input id="confirm_password" type="password" onkeyup="check()" class="form-control" name="password_confirmation" required>
                                     <span id='messages'></span>
-                                </div>
-                                <div class="col-lg-6">
-                                    <p>Foto*</p>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" id= "gambar" required name= "gambar" class="custom-file-input" id="inputGroupFile01" value="{{isset($insert) ? $insert->file : ''}}">
-                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" id="submit">

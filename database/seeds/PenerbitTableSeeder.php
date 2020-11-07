@@ -14,19 +14,19 @@ class PenerbitTableSeeder extends Seeder
       \App\Penerbit::insert([
               [
                   'id'  			=> 1,
-                  'nama'  	    => 'Erlangga',
+                  'penerbit'  	    => 'Erlangga',
                   'created_at'    => \Carbon\Carbon::now(),
                   'updated_at'    => \Carbon\Carbon::now()
               ],
               [
                   'id'  			=> 2,
-                  'nama'  	    => 'Grasindo',
+                  'penerbit'  	    => 'Grasindo',
                   'created_at'    => \Carbon\Carbon::now(),
                   'updated_at'    => \Carbon\Carbon::now()
               ],
               [
                   'id'  			=> 3,
-                  'nama'  	    => 'Platinum',
+                  'penerbit'  	    => 'Platinum',
                   'created_at'    => \Carbon\Carbon::now(),
                   'updated_at'    => \Carbon\Carbon::now()
               ],

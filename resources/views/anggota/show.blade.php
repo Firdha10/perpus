@@ -23,12 +23,6 @@ $(document).ready(function() {
                     <div class="card-body">
                       <h4 class="card-title">Detail <b>{{$data->nama}}</b></h4>
                       <form class="forms-sample">
-                        <div class="form-group">
-                            <div class="col-md-6">
-                                <img class="product" width="200" height="200" @if($data->user->gambar) src="{{ asset('images/user/'.$data->user->gambar) }}" @else src="{{ asset('images/user/default.png') }}" @endif />
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('nama') ? ' has-error' : '' }}">
                             <label for="nama" class="col-md-4 control-label">Nama</label>
                             <div class="col-md-6">
@@ -47,6 +41,17 @@ $(document).ready(function() {
                                 @if ($errors->has('no_identitas'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('no_identitas') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('no_telp') ? ' has-error' : '' }}">
+                            <label for="no_telp" class="col-md-4 control-label">Nomor Telepon</label>
+                            <div class="col-md-6">
+                                <input id="no_telp" type="number" class="form-control" name="no_telp" value="{{ $data->no_telp }}" maxlength="8" readonly>
+                                @if ($errors->has('no_telp'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('no_telp') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -85,18 +90,15 @@ $(document).ready(function() {
                             </select>
                             </div>
                         </div>
-
-                        <div class="form-group{{ $errors->has('jurusan_id') ? ' has-error' : '' }}">
-                            <label for="jurusan_id" class="col-md-4 control-label">Jurusan</label>
+                        <div class="form-group{{ $errors->has('alamat') ? ' has-error' : '' }}">
+                            <label for="alamat" class="col-md-4 control-label">Alamat</label>
                             <div class="col-md-6">
-                                <input id="jurusan_id" type="text" class="form-control" name="jurusan_id" value="{{ $data->jurusan->jurusan_id }}" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }} " style="margin-bottom: 20px;">
-                            <label for="user_id" class="col-md-4 control-label">User Login</label>
-                            <div class="col-md-6">
-                                <input id="tgl_lahir" type="text" class="form-control" name="tgl_lahir" value="{{ $data->user->username }}" readonly="">
+                                <input id="alamat" type="textarea" class="form-control" name="alamat" value="{{ $data->alamat }}" readonly>
+                                @if ($errors->has('alamat'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('alamat') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <a href="{{route('anggota.index')}}" class="btn btn-danger pull-right">Kembali</a>

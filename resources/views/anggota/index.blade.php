@@ -66,14 +66,7 @@
             <tbody>
               @foreach($datas as $data)
                 <tr>
-                  <td class="py-1">
-                    @if($data->user->gambar)
-                      <img src="{{url('images/user', $data->user->gambar)}}" alt="image" style="margin-right: 10px;" />
-                    @else
-                      <img src="{{url('images/user/default.png')}}" alt="image" style="margin-right: 10px;" />
-                    @endif
-                      {{$data->nama}}
-                  </td>
+                  <td class="py-1">{{$data->nama}}</td>
                   <td>{{$data->no_identitas}}</td>
                   <td>{{$data->jk === "L" ? "Laki - Laki" : "Perempuan"}}</td>
                   <td style="text-align:center;">

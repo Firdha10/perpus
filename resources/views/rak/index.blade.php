@@ -36,7 +36,7 @@
 @stop
 @extends('layouts.app')
 @section('title')
-    Data Jurusan
+    Data Rak
 @endsection
 @section('content')
 <div class="row">

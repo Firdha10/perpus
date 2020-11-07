@@ -36,12 +36,12 @@
 @stop
 @extends('layouts.app')
 @section('title')
-    Data Buku
+    Data Pengarang
 @endsection
 @section('content')
-<div class="row">     
+<div class="row">
   <div class="col-lg-2">
-    <a href="{{ route('buku.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Buku</a>
+    <a href="{{ route('pengarang.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Pengarang</a>
   </div>
   <br><br>
   <div class="col-lg-12">
@@ -52,42 +52,29 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <a href="{{url('format_buku')}}" class="btn btn-xs btn-primary float-right"> <i class="fas fa-print"></i>Cetak</a>
-        <h4 class="card-title pull-left">Data Buku</h4>
+        <h4 class="card-title">Data Pengarang</h4>
         <div class="table-responsive">
           <table class="table table-striped" id="table">
             <thead>
               <tr>
-                <th>Judul</th>
-                <th>Rak</th>
+                <th>Nama Pengarang</th>
                 <th style="text-align:center;">Aksi</th>
               </tr>
             </thead>
             <tbody>
               @foreach($datas as $data)
                 <tr>
-                  <td class="py-1">
-                    @if($data->cover)
-                      <img src="{{url('images/buku/'. $data->cover)}}" alt="image" style="margin-right: 10px;" />
-                    @else
-                      <img src="{{url('images/buku/default.png')}}" alt="image" style="margin-right: 10px;" />
-                    @endif
-                      {{$data->judul}}
-                  </td>
-                  <td>Rak {{$data->rak->lokasi}}</td>
+                  <td>{{$data->nama}}</td>
                   <td style="text-align:center;">
                     <div class="btn-group">
-                      <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('buku.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>
+                      <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('pengarang.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>
                     </div>
                     <div class="btn-group">
-                      <form action="{{ route('buku.destroy', $data->id) }}" class="delete_form"  method="post">
+                      <form action="{{ route('pengarang.destroy', $data->id)}}" class="delete_form"  method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
-                        <button class="btn btn-danger btn-sm" id="btn-delete"> <i class="fa fa-trash"></i></button>
+                        <button class="btn btn-danger btn-sm" id="btn_delete"> <i class="fa fa-trash"></i></button>
                       </form>
-                    </div>
-                    <div class="btn-group">
-                      <a href="{{route('buku.show', $data->id)}}" class="btn btn-success text-white btn-sm"><i class="fas fa fa-file"></i></a>
                     </div>
                   </td>
                 </tr>

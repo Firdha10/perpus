@@ -30,6 +30,12 @@
           </li>
           @if(Auth::user()->level == 'admin')
             <li class="menu-header">Master</li>
+            <li class="nav-item {{ setActive(['user*']) }}"> 
+              <a class="nav-link" href="{{route('user.index')}}">
+                <i class="menu-icon mdi mdi-account"></i>
+                <span class="menu-title">Data User</span>
+              </a>
+            </li>
             <li class="nav-item {{ setActive(['anggota*']) }}"> 
               <a class="nav-link" href="{{route('anggota.index')}}">
                 <i class="menu-icon mdi mdi-account-box"></i>
@@ -38,20 +44,26 @@
             </li>
             <li class="nav-item {{ setActive(['buku*']) }}"> 
               <a class="nav-link" href="{{route('buku.index')}}">
-                <i class="menu-icon mdi mdi-book"></i>
+                <i class="menu-icon mdi mdi-book-open"></i>
                 <span class="menu-title">Data Buku</span>
               </a>
             </li>
-            <li class="nav-item {{ setActive(['user*']) }}"> 
-              <a class="nav-link" href="{{route('user.index')}}">
-                <i class="menu-icon mdi mdi-account"></i>
-                <span class="menu-title">Data User</span>
+            <li class="nav-item {{ setActive(['pengarang*']) }}"> 
+              <a class="nav-link" href="{{route('pengarang.index')}}">
+                <i class="menu-icon mdi mdi-human-child"></i>
+                <span class="menu-title">Data Pengarang</span>
               </a>
             </li>
-            <li class="nav-item {{ setActive(['jurusan*']) }}"> 
-              <a class="nav-link" href="{{route('jurusan.index')}}">
-                <i class="menu-icon mdi mdi-note"></i>
-                <span class="menu-title">Data Jurusan</span>
+            <li class="nav-item {{ setActive(['penerbit*']) }}"> 
+              <a class="nav-link" href="{{route('penerbit.index')}}">
+                <i class="menu-icon mdi mdi-human-child"></i>
+                <span class="menu-title">Data Penerbit</span>
+              </a>
+            </li>
+            <li class="nav-item {{ setActive(['jenisbuku*']) }}"> 
+              <a class="nav-link" href="{{route('jenisbuku.index')}}">
+                <i class="menu-icon mdi mdi-book"></i>
+                <span class="menu-title">Data Jenis Buku</span>
               </a>
             </li>
             <li class="nav-item {{ setActive(['rak*']) }}"> 

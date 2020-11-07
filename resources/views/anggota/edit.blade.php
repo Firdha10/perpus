@@ -42,6 +42,17 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('no_telp') ? ' has-error' : '' }}">
+                                <label for="no_telp" class="col-md-4 control-label">Nomor Telepon</label>
+                                <div class="col-md-6">
+                                    <input id="no_telp" type="number" class="form-control" name="no_telp" value="{{ $data->no_telp }}" maxlength="8" required>
+                                    @if ($errors->has('no_telp'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('no_telp') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('tempat_lahir') ? ' has-error' : '' }}">
                                 <label for="tempat_lahir" class="col-md-4 control-label">Tempat Lahir</label>
                                 <div class="col-md-6">
@@ -74,26 +85,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('jurusan_id') ? ' has-error' : '' }}">
-                                <label for="jurusan_id" class="col-md-4 control-label">Jurusan</label>
+                            <div class="form-group{{ $errors->has('alamat') ? ' has-error' : '' }}">
+                                <label for="alamat" class="col-md-4 control-label">Alamat</label>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="jurusan_id" required="">
-                                        <option value="">--- Pilih Jurusan ---</option>
-                                        @foreach($u as $list)
-                                            <option value="{{$list->id}}" {{$data->jurusan_id === $list->id ? "selected" : ""}}>{{$list->jurusan_id}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }} " style="margin-bottom: 20px;">
-                                <label for="user_id" class="col-md-4 control-label">User Login</label>
-                                <div class="col-md-6">
-                                    <select class="form-control" name="user_id" required="">
-                                        <option value="">--- Pilih User ---</option>
-                                        @foreach($users as $user)
-                                            <option value="{{$user->id}}" {{$data->user_id === $user->id ? "selected" : ""}}>{{$user->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input id="alamat" type="text" class="form-control" name="alamat" value="{{ $data->alamat }}" required>
+                                    @if ($errors->has('alamat'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('alamat') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" id="submit">Simpan</button>

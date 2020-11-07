@@ -42,9 +42,6 @@
 @endsection
 @section('content')
 <div class="row">
-  <div class="col-lg-2">
-    <a href="{{ route('user.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah User</a>
-  </div>
   <br><br>
   <div class="col-lg-12">
     @include('layouts.alert-messages')
@@ -59,7 +56,7 @@
           <table id="table" class="table table-striped">
             <thead>
               <tr>
-                <th>Nama</th>
+                <th>Email User</th>
                 <th>Tanggal Ditambahkan</th>
                 <th style="text-align:center;">Aksi</th>
               </tr>
@@ -67,19 +64,9 @@
             <tbody>
               @foreach($datas as $data)
                 <tr>
-                  <td class="py-1">
-                    @if($data->gambar)
-                      <img src="{{url('images/user', $data->gambar)}}" alt="image" style="margin-right: 10px;" />
-                    @else
-                      <img src="{{url('images/user/default.png')}}" alt="image" style="margin-right: 10px;" />
-                    @endif
-                      {{$data->name}}
-                  </td>
+                  <td class="py-1">{{$data->email}}</td>
                   <td>{{$data->created_at}}</td>
                   <td style="text-align:center;">
-                    <div class="btn-group"> 
-                      <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('user.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>
-                    </div>
                     <div class="btn-group">
                       <form action="{{ route('user.destroy', $data->id) }}" class="delete_form"  method="post">
                         {{ csrf_field() }}

@@ -24,7 +24,9 @@ Route::post('/daftar/anggota', 'BerandaController@kirim')->name('beranda.kirim')
 Route::get('daftar/anggota/berhasil', 'BerandaController@showBerhasil')->name('guest.success');
 Route::get('faqs', 'FaqController@faq');
 Route::resource('user', 'UserController');
-Route::resource('jurusan', 'JurusanController');
+Route::resource('pengarang', 'PengarangController');
+Route::resource('penerbit', 'PenerbitController');
+Route::resource('jenisbuku', 'JenisBukuController');
 Route::resource('anggota', 'AnggotaController');
 Route::resource('rak', 'RakController');
 Route::resource('buku', 'BukuController');

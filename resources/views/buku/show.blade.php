@@ -72,24 +72,35 @@ $(document).ready(function() {
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('pengarang') ? ' has-error' : '' }}">
-                                <label for="pengarang" class="col-md-4 control-label">Pengarang</label>
+                            <div class="form-group{{ $errors->has('pengarang_id') ? ' has-error' : '' }}">
+                                <label for="pengarang_id" class="col-md-4 control-label">Pengarang</label>
                                 <div class="col-md-6">
-                                    <input id="pengarang" type="text" class="form-control" name="pengarang" value="{{ $data->pengarang }}" readonly>
-                                    @if ($errors->has('pengarang'))
+                                    <input id="pengarang_id" type="text" class="form-control" name="pengarang_id" value="{{ $data->pengarang->nama }}" readonly>
+                                    @if ($errors->has('pengaran_idg'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('pengarang') }}</strong>
+                                            <strong>{{ $errors->first('pengarang_id') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('penerbit') ? ' has-error' : '' }}">
-                                <label for="penerbit" class="col-md-4 control-label">Penerbit</label>
+                            <div class="form-group{{ $errors->has('penerbit_id') ? ' has-error' : '' }}">
+                                <label for="penerbit_id" class="col-md-4 control-label">Penerbit</label>
                                 <div class="col-md-6">
-                                    <input id="penerbit" type="text" class="form-control" name="penerbit" value="{{ $data->penerbit }}" readonly>
-                                    @if ($errors->has('penerbit'))
+                                    <input id="penerbit_id" type="text" class="form-control" name="penerbit_id" value="{{ $data->penerbit->penerbit }}" readonly>
+                                    @if ($errors->has('penerbit_id'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('penerbit') }}</strong>
+                                            <strong>{{ $errors->first('penerbit_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('jenis_buku') ? ' has-error' : '' }}">
+                                <label for="jenis_buku" class="col-md-4 control-label">Jenis Buku</label>
+                                <div class="col-md-6">
+                                    <input id="jenis_buku" type="text" class="form-control" name="jenis_buku" value="{{ $data->jenis->jenis_buku }}" readonly>
+                                    @if ($errors->has('jenis_buku'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('jenis_buku') }}</strong>
                                         </span>
                                     @endif
                                 </div>

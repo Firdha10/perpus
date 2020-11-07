@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JenisBuku extends Model
 {
-    protected $table = 'penerbits';
+    protected $table = 'jenisbukus';
     protected $fillable = ['jenis_buku'];
 
     public function jeniss()
