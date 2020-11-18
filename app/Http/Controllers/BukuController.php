@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Buku;
+use App\Rak;
+use App\Pengarang;
+use App\Penerbit;
+use App\JenisBuku;
 use Carbon\Carbon;
 use Session;
 use Illuminate\Support\Facades\Redirect;
@@ -32,9 +36,16 @@ class BukuController extends Controller
             Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
             return redirect()->to('/');
         }
-
+        $buku      = DB::table('buku')->sum('buku.jumlah_buku'); 
         $datas = Buku::get();
-        return view('buku.index', compact('datas'));
+        return view('buku.index', compact('datas', 'buku'));
+    }
+    
+    public function search(Request $request)
+    {
+        $cari = $request->get('cari');
+        $barang = BarangModel::where('nama_barang','LIKE','%'.$cari.'%')->get();
+        return view('barang.index',compact('barang'));
     }
 
     /**
@@ -48,13 +59,16 @@ class BukuController extends Controller
             Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
             return redirect()->to('/');
         }
-
-        return view('buku.create');
+        $pengarangs = Pengarang::get();
+        $penerbits = Penerbit::get();
+        $raks = Rak::get();
+        $jenis = JenisBuku::get();
+        return view('buku.create',compact('pengarangs', 'penerbits', 'raks', 'jenis'));
     }
 
     public function format()
     {
-        $data = [['judul' => null, 'isbn' => null, 'pengarang' => null, 'penerbit' => null, 'tahun_terbit' => null, 'jumlah_buku' => null, 'deskripsi' => null, 'lokasi' => null]];
+        $data = [['judul' => null, 'isbn' => null, 'pengarang_id' => null, 'penerbit_id' => null, 'tahun_terbit' => null, 'jumlah_buku' => null, 'deskripsi' => null, 'rak_id' => null]];
             $fileName = 'format-buku';
             
 
@@ -84,12 +98,12 @@ class BukuController extends Controller
                     $insert[] = [
                             'judul' => $value->judul, 
                             'isbn' => $value->isbn, 
-                            'pengarang' => $value->pengarang, 
-                            'penerbit' => $value->penerbit,
+                            'pengarang_id' => $value->pengarang_id, 
+                            'penerbit_id' => $value->penerbit_id,
                             'tahun_terbit' => $value->tahun_terbit, 
                             'jumlah_buku' => $value->jumlah_buku, 
                             'deskripsi' => $value->deskripsi, 
-                            'lokasi' => $value->lokasi,
+                            'rak_id' => $value->rak_id,
                             'cover' => NULL];
 
                     Buku::create($insert[$key]);
@@ -120,23 +134,24 @@ class BukuController extends Controller
             $dt = Carbon::now();
             $acak  = $file->getClientOriginalExtension();
             $fileName = rand(11111,99999).'-'.$dt->format('Y-m-d-H-i-s').'.'.$acak; 
-            $request->file('cover')->move("images/buku", $fileName);
+            $request->file('cover')->move("images/buku/", $fileName);
             $cover = $fileName;
         } else {
             $cover = NULL;
         }
 
         Buku::create([
-                'judul' => $request->get('judul'),
-                'isbn' => $request->get('isbn'),
-                'pengarang' => $request->get('pengarang'),
-                'penerbit' => $request->get('penerbit'),
-                'tahun_terbit' => $request->get('tahun_terbit'),
-                'jumlah_buku' => $request->get('jumlah_buku'),
-                'deskripsi' => $request->get('deskripsi'),
-                'lokasi' => $request->get('lokasi'),
-                'cover' => $cover
-            ]);
+            'judul' => $request->get('judul'),
+            'isbn' => $request->get('isbn'),
+            'pengarang_id' => $request->get('pengarang_id'),
+            'penerbit_id' => $request->get('penerbit_id'),
+            'tahun_terbit' => $request->get('tahun_terbit'),
+            'jumlah_buku' => $request->get('jumlah_buku'),
+            'deskripsi' => $request->get('deskripsi'),
+            'rak_id' => $request->get('rak_id'),
+            'jenis_id' => $request->get('jenis_id'),
+            'cover' => $cover
+        ]);
 
         return redirect()->route('buku.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
@@ -154,8 +169,8 @@ class BukuController extends Controller
                 Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
                 return redirect()->to('/');
         }
-
-        $data = Buku::findOrFail($id);
+        
+        $data   = Buku::findOrFail($id);
 
         return view('buku.show', compact('data'));
     }
@@ -172,9 +187,12 @@ class BukuController extends Controller
                 Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
                 return redirect()->to('/');
         }
-
+        $raks   = Rak::all();
+        $jenis  = JenisBuku::all();
+        $pengarangs = Pengarang::get();
+        $penerbits = Penerbit::get();
         $data = Buku::findOrFail($id);
-        return view('buku.edit', compact('data'));
+        return view('buku.edit', compact('data','jenis','raks', 'pengarangs', 'penerbits'));
     }
 
     /**
@@ -198,16 +216,17 @@ class BukuController extends Controller
         }
 
         Buku::find($id)->update([
-             'judul' => $request->get('judul'),
-                'isbn' => $request->get('isbn'),
-                'pengarang' => $request->get('pengarang'),
-                'penerbit' => $request->get('penerbit'),
-                'tahun_terbit' => $request->get('tahun_terbit'),
-                'jumlah_buku' => $request->get('jumlah_buku'),
-                'deskripsi' => $request->get('deskripsi'),
-                'lokasi' => $request->get('lokasi'),
-                'cover' => $cover
-                ]);
+            'judul' => $request->get('judul'),
+            'isbn' => $request->get('isbn'),
+            'pengarang_id' => $request->get('pengarang_id'),
+            'penerbit_id' => $request->get('penerbit_id'),
+            'tahun_terbit' => $request->get('tahun_terbit'),
+            'jumlah_buku' => $request->get('jumlah_buku'),
+            'deskripsi' => $request->get('deskripsi'),
+            'rak_id' => $request->get('rak_id'),
+            'jenis_id' => $request->get('jenis_id'),
+            'cover' => $cover
+        ]);
 
         alert()->success('Berhasil.','Data telah diubah!');
         return redirect()->route('buku.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);

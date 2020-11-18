@@ -90,12 +90,12 @@
             <div class="float-right">
               <p class="mb-0 text-right">Buku</p>
               <div class="fluid-container">
-                <h3 class="font-weight-medium text-right mb-0">{{$buku->count()}}</h3>
+                <h3 class="font-weight-medium text-right mb-0">{{$buku}}</h3>
               </div>
             </div>
           </div>
           <p class="text-muted mt-3 mb-0">
-            <i class="mdi mdi-book mr-1" aria-hidden="true"></i> Total judul buku
+            <i class="mdi mdi-book mr-1" aria-hidden="true"></i> Total Buku
           </p>
         </div>
       </div>
@@ -132,7 +132,6 @@
             <thead>
               <tr>
                 <th>Kode</th>
-                <th>Buku</th>
                 <th>Peminjam</th>
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
@@ -144,11 +143,10 @@
               @foreach($datas as $data)
               <tr>
                 <td class="py-1">
-                  <a href="{{route('transaksi.show', $data->id)}}"> 
+                  <a href="{{route('peminjaman.show', $data->id)}}"> 
                     {{$data->kode_transaksi}}
                   </a>
                 </td>
-                <td>{{$data->buku->judul}}</td>
                 <td>{{$data->anggota->nama}}</td>
                 <td>{{date('d/m/y', strtotime($data->tgl_pinjam))}}</td>
                 <td>{{date('d/m/y', strtotime($data->tgl_kembali))}}</td>
@@ -160,7 +158,7 @@
                   @endif
                 </td>
                 <td style="text-align:center;">
-                  <form action="{{ route('transaksi.update', $data->id) }}" method="post" enctype="multipart/form-data" class="edit_form">
+                  <form action="{{ route('peminjaman.update', $data->id) }}" method="post" enctype="multipart/form-data" class="edit_form">
                     {{ csrf_field() }}
                     {{ method_field('put') }}
                     <button class="btn btn-info btn-sm">Sudah Kembali</button>

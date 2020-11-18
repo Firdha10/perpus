@@ -41,7 +41,7 @@
 @section('content')
 <div class="row">
   <div class="col-lg-2">
-    <a href="{{ route('jenisbuku.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Jenis Buku</a>
+    <a href="{{ route('jenis.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Jenis Buku</a>
   </div>
   <br><br>
   <div class="col-lg-12">
@@ -67,10 +67,10 @@
                   <td>{{$data->jenis_buku}}</td>
                   <td style="text-align:center;">
                     <div class="btn-group">
-                      <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('jenisbuku.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>
+                      <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('jenis.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>
                     </div>
                     <div class="btn-group">
-                      <form action="{{ route('jenisbuku.destroy', $data->id)}}" class="delete_form"  method="post">
+                      <form action="{{ route('jenis.destroy', $data->id)}}" class="delete_form"  method="post">
                         {{ csrf_field() }}
                         {{ method_field('delete') }}
                         <button class="btn btn-danger btn-sm" id="btn_delete"> <i class="fa fa-trash"></i></button>

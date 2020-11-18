@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-lg-6 {{ $errors->has('no_identitas') ? ' has-error' : '' }}">
                             <p>Nomor Identitas*</p>
-                            <input id="no_identitas" type="text" class="form-control" name="no_identitas" value="{{ old('no_identitas') }}" required>
+                            <input id="no_identitas" type="number" class="form-control" name="no_identitas" value="{{ old('no_identitas') }}" required>
                             @if ($errors->has('no_identitas'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('no_identitas') }}</strong>
@@ -81,14 +81,23 @@
                                 <option value="P">Perempuan</option>
                             </select>
                         </div>
-                        <div class="col-lg-6 {{ $errors->has('jurusan_id') ? ' has-error' : '' }}">
-                            <p>Jurusan*</p>
-                            <select name="jurusan_id" required="" class="form-control">
-                                <option value=''>--- Pilih Jurusan ---</option>
-                                @foreach($u as $list)
-                                    <option value="{{ $list['id'] }}"> {{$list->jurusan}} </option>
-                                @endforeach
-                            </select>
+                        <div class="col-lg-6 {{ $errors->has('no_telp') ? ' has-error' : '' }}">
+                            <p>Nomor Telepon*</p>
+                            <input id="no_telp" type="number" class="form-control" name="no_telp" value="{{ old('no_telp') }}" required>
+                            @if ($errors->has('no_telp'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('no_telp') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="col-lg-6 {{ $errors->has('alamat') ? ' has-error' : '' }}">
+                            <p>Alamat*</p>
+                            <input id="alamat" type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" required>
+                            @if ($errors->has('alamat'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('alamat') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div> 
                 </div>

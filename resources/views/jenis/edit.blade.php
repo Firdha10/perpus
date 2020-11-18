@@ -3,7 +3,7 @@
     Edit Pengarang
 @endsection
 @section('content')
-<form action="{{ route('jenisbuku.update', $data->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('jenis.update', $data->id) }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{ method_field('put') }}
     <div class="row">
@@ -25,7 +25,7 @@
                     <button type="submit" class="btn btn-primary" id="submit">
                         Simpan
                     </button>
-                    <a href="{{route('jenisbuku.index')}}" class="btn btn-danger ">Kembali</a>
+                    <a href="{{route('jenis.index')}}" class="btn btn-danger ">Kembali</a>
                 </div>
             </div>
         </div>

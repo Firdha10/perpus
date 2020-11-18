@@ -59,7 +59,8 @@
               <tr>
                 <th>Nama</th>
                 <th>Nomor Identitas</th>
-                <th>Jenis Kelamin</th>
+                <th>Tanggal Ditambahkan</th>
+
                 <th style="text-align:center;">Aksi</th>
               </tr>
             </thead>
@@ -68,7 +69,7 @@
                 <tr>
                   <td class="py-1">{{$data->nama}}</td>
                   <td>{{$data->no_identitas}}</td>
-                  <td>{{$data->jk === "L" ? "Laki - Laki" : "Perempuan"}}</td>
+                  <td>{{$data->created_at}}</td>
                   <td style="text-align:center;">
                     <div class="btn-group">
                       <a type="submit" class="btn btn-primary text-white btn-sm" href="{{route('anggota.edit', $data->id)}}"> <i class="fas fa-pencil-alt"></i> </a>

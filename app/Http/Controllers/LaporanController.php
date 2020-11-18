@@ -134,77 +134,69 @@ public function transaksi()
     }
 
 
-public function transaksiExcel(Request $request)
-    {
-        $nama = 'laporan_transaksi_'.date('Y-m-d_H-i-s');
-        Excel::create($nama, function ($excel) use ($request) {
+public function transaksiExcel(Request $request) {
+    $nama = 'laporan_transaksi_'.date('Y-m-d_H-i-s');
+    Excel::create($nama, function ($excel) use ($request) {
         $excel->sheet('Laporan Data Transaksi', function ($sheet) use ($request) {
-        
-        $sheet->mergeCells('A1:H1');
+            $sheet->mergeCells('A1:H1');
+            // $sheet->setAllBorders('thin');
+            $sheet->row(1, function ($row) {
+                $row->setFontFamily('Calibri');
+                $row->setFontSize(11);
+                $row->setAlignment('center');
+                $row->setFontWeight('bold');
+            });
 
-       // $sheet->setAllBorders('thin');
-        $sheet->row(1, function ($row) {
-            $row->setFontFamily('Calibri');
-            $row->setFontSize(11);
-            $row->setAlignment('center');
-            $row->setFontWeight('bold');
-        });
+            $sheet->row(1, array('LAPORAN DATA TRANSAKSI'));
 
-        $sheet->row(1, array('LAPORAN DATA TRANSAKSI'));
+            $sheet->row(2, function ($row) {
+                $row->setFontFamily('Calibri');
+                $row->setFontSize(11);
+                $row->setFontWeight('bold');
+            });
 
-        $sheet->row(2, function ($row) {
-            $row->setFontFamily('Calibri');
-            $row->setFontSize(11);
-            $row->setFontWeight('bold');
-        });
+            $q = Transaksi::query();
 
-        $q = Transaksi::query();
-
-        if($request->get('status')) 
-        {
-             if($request->get('status') == 'pinjam') {
-                $q->where('status', 'pinjam');
-            } else {
-                $q->where('status', 'kembali');
+            if($request->get('status')) 
+            {
+                if($request->get('status') == 'pinjam') {
+                    $q->where('status', 'pinjam');
+                } else {
+                    $q->where('status', 'kembali');
+                }
             }
-        }
 
-        if(Auth::user()->level == 'user')
-        {
-            $q->where('anggota_id', Auth::user()->anggota->id);
-        }
+            if(Auth::user()->level == 'user')
+            {
+                $q->where('anggota_id', Auth::user()->anggota->id);
+            }
 
-        $datas = $q->get();
-
-       // $sheet->appendRow(array_keys($datas[0]));
-        $sheet->row($sheet->getHighestRow(), function ($row) {
-            $row->setFontWeight('bold');
-        });
-
-         $datasheet = array();
-         $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "BUKU", "PEMINJAM",  "TGL PINJAM","TGL KEMBALI","STATUS", "KET");
-         $i=1;
-
-        foreach ($datas as $data) {
-
-           // $sheet->appendrow($data);
-          $datasheet[$i] = array($i,
-                        $data['kode_transaksi'],
-                        $data->buku->judul,
-                        $data->anggota->nama,
-                        date('d/m/y', strtotime($data['tgl_pinjam'])),
-                        date('d/m/y', strtotime($data['tgl_kembali'])),
-                        $data['status'],
-                        $data['ket']
-                    );
-          
-          $i++;
-        }
-
-        $sheet->fromArray($datasheet);
-    });
+            $datas = $q->get();
+            // $sheet->appendRow(array_keys($datas[0]));
+            $sheet->row($sheet->getHighestRow(), function ($row) {
+                $row->setFontWeight('bold');
+            });
+            
+            $datasheet = array();
+            $datasheet[0]  =   array("NO", "KODE TRANSAKSI", "BUKU", "PEMINJAM",  "TGL PINJAM","TGL KEMBALI","STATUS", "KET");
+            $i=1;
+            foreach ($datas as $data) {
+                // $sheet->appendrow($data);
+                $datasheet[$i] = array($i,
+                            $data['kode_transaksi'],
+                            $data->buku->judul,
+                            $data->anggota->nama,
+                            date('d/m/y', strtotime($data['tgl_pinjam'])),
+                            date('d/m/y', strtotime($data['tgl_kembali'])),
+                            $data['status'],
+                            $data['ket']
+                        );
+                $i++;
+            }
+            $sheet->fromArray($datasheet);
+            });
 
     })->export('xls');
 
-}
+    }
 }

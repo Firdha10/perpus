@@ -58,22 +58,50 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
+        $count = User::where('email',$request->input('email'))->count();
+
+        if($count>0){
+            Session::flash('message', 'Akun Dengan Email Yang Sama Telah Terdaftar!');
+            Session::flash('message_type', 'danger');
+            return redirect()->to('anggota');
+        }
         $count = Anggota::where('no_identitas',$request->input('no_identitas'))->count();
 
         if($count>0){
-            Session::flash('message', 'Already exist!');
+            Session::flash('message', 'Anggota Dengan Nomor Identitas Yang Sama Telah Terdaftar!');
             Session::flash('message_type', 'danger');
             return redirect()->to('anggota');
         }
 
         $this->validate($request, [
             'nama' => 'required|string|max:255',
-            'no_identitas' => 'required|string|max:20|unique:anggota'
+            'no_identitas' => 'required|string|max:20|unique:anggota',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
-        Anggota::create($request->all());
+        if($request->file('gambar') == '') {
+            $gambar = NULL;
+        } else {
+            $file = $request->file('gambar');
+            $dt = Carbon::now();
+            $acak  = $file->getClientOriginalExtension();
+            $fileName = rand(11111,99999).'-'.$dt->format('Y-m-d-H-i-s').'.'.$acak; 
+            $request->file('gambar')->move("images/user", $fileName);
+            $gambar = $fileName;
+        }
 
-    
+        $anggota = Anggota::create($request->all());
+
+        if($anggota){
+            $user = User::create([
+                'email' => $request->input('email'),
+                'level' => 'user',
+                'password' => bcrypt(($request->input('password'))),
+                'gambar' => $gambar,
+                'anggota_id' => $anggota->id,
+            ]);
+        }
         return redirect()->route('anggota.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
 
     }

@@ -1,14 +1,10 @@
 @section('js')
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-    $(".users").select2();
-});
-
-</script>
-
-<script type="text/javascript">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".users").select2();
+        });
+    </script>
+    <script type="text/javascript">
         function readURL() {
             var input = this;
             if (input.files && input.files[0]) {
@@ -19,24 +15,38 @@ $(document).ready(function() {
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
         $(function () {
             $(".uploads").change(readURL)
             $("#f").submit(function(){
                 // do ajax submit or just classic form submit
-              //  alert("fake subminting")
+                //  alert("fake subminting")
                 return false
             })
         })
-        </script>
-@stop
+    </script>
+    <script type="text/javascript">
+        $(document).on('click', '.pilih', function (e) {
+        document.getElementById("pengarang_id").value = $(this).attr('data-pengarang_id');
+        document.getElementById("pengarangs_nama").value = $(this).attr('data-pengarangs_nama');
+        $('#myModal').modal('hide');
+        });
 
+        $(document).on('click', '.pilih_penerbit', function (e) {
+        document.getElementById("penerbit_id").value = $(this).attr('data-penerbit_id');
+        document.getElementById("penerbits_penerbit").value = $(this).attr('data-penerbits_penerbit');
+        $('#myModal2').modal('hide');
+        });
+
+        $(function () {
+        $("#lookup, #lookup2").dataTable();
+        });
+  </script>
+@stop
 @extends('layouts.app')
 @section('title')
     Edit Buku
 @endsection
 @section('content')
-
 <form action="{{ route('buku.update', $data->id) }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     {{ method_field('put') }}
@@ -68,23 +78,35 @@ $(document).ready(function() {
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <div class="col-lg-6 {{ $errors->has('pengarang') ? ' has-error' : '' }}">
-                                    <label for="pengarang" class="col-md-4 control-label">Pengarang</label>
-                                    <input id="pengarang" type="text" class="form-control" name="pengarang" value="{{ $data->pengarang }}" required>
-                                    @if ($errors->has('pengarang'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('pengarang') }}</strong>
+                                <div class="col-lg-6 {{ $errors->has('pengarang_id') ? ' has-error' : '' }}">
+                                    <p>Pengarang*</p>
+                                    <div class="input-group">
+                                        <input id="pengarangs_nama" type="text" class="form-control" value="{{ $data->pengarang->nama}}" readonly="" required>
+                                        <input id="pengarang_id" class="form-control" type="hidden" name="pengarang_id"  required readonly="">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-info btn-secondary" data-toggle="modal" data-target="#myModal"><b>Cari Pengarang</b> <span class="fa fa-search"></span></button>
                                         </span>
-                                    @endif
+                                    </div>
+                                    @if ($errors->has('pengarang_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('pengarang_id') }}</strong>
+                                    </span>
+                                    @endif 
                                 </div>
-                                <div class="col-lg-6{{ $errors->has('penerbit') ? ' has-error' : '' }}">
-                                    <label for="penerbit" class="col-md-4 control-label">Penerbit</label>
-                                    <input id="penerbit" type="text" class="form-control" name="penerbit" value="{{ $data->penerbit }}" required>
-                                    @if ($errors->has('penerbit'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('penerbit') }}</strong>
+                                <div class="col-lg-6 {{ $errors->has('penerbit_id') ? ' has-error' : '' }}">
+                                    <p>Penerbit*</p>
+                                    <div class="input-group">
+                                        <input id="penerbits_penerbit" type="text" class="form-control" readonly="" required  value="{{ $data->penerbit->penerbit}}">
+                                        <input id="penerbit_id" type="hidden" class="form-control" name="penerbit_id" required readonly="">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-info btn-secondary" data-toggle="modal" data-target="#myModal2"><b>Cari Penerbit</b> <span class="fa fa-search"></span></button>
                                         </span>
-                                    @endif
+                                    </div>
+                                    @if ($errors->has('penerbit_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('penerbit_id') }}</strong>
+                                    </span>
+                                    @endif 
                                 </div>
                             </div>
                             <div class="row mb-4">
@@ -108,6 +130,24 @@ $(document).ready(function() {
                                 </div>
                             </div>
                             <div class="row mb-4">
+                                <div class="col-lg-6">
+                                    <p>Lokasi Buku (Rak)*</p>
+                                    <select required name="rak_id" class="form-control" value="{{ $data->rak->lokasi }}">
+                                        @foreach($raks as $rak)
+                                            <option value="{{ $rak['id'] }}" {{$rak->id == $data->rak_id ?  'selected' : ''}}> {{$rak->lokasi}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 {{ $errors->has('jenis_id') ? ' has-error' : '' }}">
+                                    <p>Jenis Buku*</p>
+                                    <select required name="jenis_id" class="form-control" value="{{ $data->jenis->jenis_buku }}">
+                                        @foreach($jenis as $list)
+                                        <option value="{{ $list['id'] }}" {{$list->id == $data->jenis_id ?  'selected' : ''}}> {{$list->jenis_buku}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
                                 <div class="col-lg-6 {{ $errors->has('deskripsi') ? ' has-error' : '' }}">
                                     <label for="deskripsi" class="col-md-4 control-label">Deskripsi</label>
                                     <input id="deskripsi" type="text" class="form-control" name="deskripsi" value="{{ $data->deskripsi }}" >
@@ -117,17 +157,9 @@ $(document).ready(function() {
                                         </span>
                                     @endif
                                 </div>
-                                <div class="col-lg-6 {{ $errors->has('lokasi') ? ' has-error' : '' }}">
-                                    <label for="lokasi" class="col-md-4 control-label">Lokasi</label>
-                                    <select class="form-control" name="lokasi" required="">
-                                        <option value="rak1" {{$data->lokasi === "rak1" ? "selected" : ""}}>Rak 1</option>
-                                        <option value="rak2" {{$data->lokasi === "rak2" ? "selected" : ""}}>Rak 2</option>
-                                        <option value="rak3" {{$data->lokasi === "rak3" ? "selected" : ""}}>Rak 3</option>
-                                    </select>
-                                </div>
                                 <div class="col-lg-6">
                                     <br>
-                                    <label for="email" class="col-md-4 control-label">Cover</label>
+                                    <label for="cover" class="col-md-4 control-label">Cover</label>
                                     <br>
                                     <img width="200" height="200" @if($data->cover) src="{{ asset('images/buku/'.$data->cover) }}" @endif />
                                     <input type="file" class="uploads form-control" style="margin-top: 20px;" name="cover">
@@ -144,4 +176,62 @@ $(document).ready(function() {
         </div>
     </div>
 </form>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content" style="background: #fff;">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cari Pengarang</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <table id="lookup" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Pengarang</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($pengarangs as $data)
+                        <tr class="pilih" data-pengarang_id="<?php echo $data->id; ?>" data-pengarangs_nama="<?php echo $data->nama; ?>">
+                            <td>{{$data->nama}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>  
+            </div>
+      </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content" style="background: #fff;">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Cari Penerbit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <table id="lookup2" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Penerbit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($penerbits as $data)
+                        <tr class="pilih_penerbit" data-penerbit_id="<?php echo $data->id; ?>" data-penerbits_penerbit="<?php echo $data->penerbit; ?>">
+                            <td>{{$data->penerbit}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>  
+            </div>
+      </div>
+    </div>
+</div>
 @endsection

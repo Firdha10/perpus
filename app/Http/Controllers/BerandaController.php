@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Jurusan;
 use App\User;
 use App\Anggota;
 use Illuminate\Http\Request;
@@ -14,7 +13,6 @@ class BerandaController extends Controller
     }
     
     public function daftar(){
-        $u = Jurusan::all();
         return view('guest.daftar', compact('u'));
     }
 
@@ -28,8 +26,6 @@ class BerandaController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-
-
         if($request->file('gambar') == '') {
             $gambar = NULL;
         } else {
@@ -40,28 +36,24 @@ class BerandaController extends Controller
             $request->file('gambar')->move("images/user", $fileName);
             $gambar = $fileName;
         }
-
-        $user = User::create([
-            'email' => $request->input('email'),
-            'level' => 'user',
-            'password' => bcrypt(($request->input('password'))),
-            'gambar' => $gambar
+        $anggota = Anggota::insert([
+            'nama' => $request->nama,
+            'no_identitas' => $request->no_identitas,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
+            'jk' => $request->jk,
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat
         ]);
-
-        if($user){
-
-            $anggota = Anggota::insert([
-                'nama' => $request->nama,
-                'no_identitas' => $request->no_identitas,
-                'tempat_lahir' => $request->tempat_lahir,
-                'tgl_lahir' => $request->tgl_lahir,
-                'jk' => $request->jk,
-                'jurusan_id' => $request->jurusan_id,
-                'user_id' => $user->id,
+        if($anggota){
+            $user = User::create([
+                'email' => $request->input('email'),
+                'level' => 'user',
+                'password' => bcrypt(($request->input('password'))),
+                'gambar' => $gambar,
+                'anggota_id' => $anggota->id,
             ]);
         }
-
         return redirect()->route('guest.success');
-        
     }
 }

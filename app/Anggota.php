@@ -21,8 +21,9 @@ class Anggota extends Model
     {
     	return $this->hasMany(Transaksi::class);
     }
+    
     public function anggota()
     {
-        return $this->hasMany(Anggota::class);
+        return $this->hasOne(Anggota::class);
     }
 }

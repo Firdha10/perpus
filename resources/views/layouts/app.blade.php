@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="{{ asset('css/select2.css')}}">
   <link rel="stylesheet" href="{{ asset('css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
   @section('css')
 
   @show
@@ -103,6 +104,7 @@
   <!-- <script src="{{asset('js/sweetalert2.all.js')}}"></script> -->
   <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
   <script src="{{asset('js/select2.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
   <!-- @include('sweetalert::alert') -->
   @section('js')
 

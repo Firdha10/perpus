@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Buku extends Model
 {
     protected $table = 'buku';
-    protected $fillable = ['judul', 'isbn', 'penerbit_id', 'pengarang_id', 'tahun_terbit', 'jumlah_buku', 'rak_id', 'jenis_id','deskripsi', 'cover'];
+    protected $fillable = ['jumlah_buku','judul', 'isbn', 'penerbit_id', 'pengarang_id', 'tahun_terbit', 'rak_id', 'jenis_id','deskripsi', 'cover'];
 
     /**
      * Method One To Many 
@@ -16,7 +16,6 @@ class Buku extends Model
     {
     	return $this->hasMany(DetailTransaksi::class);
     }
-
     public function rak() 
     {
         return $this->belongsTo(Rak::class, 'rak_id');

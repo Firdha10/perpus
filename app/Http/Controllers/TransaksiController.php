@@ -7,26 +7,28 @@ use App\User;
 use App\Buku;
 use App\Anggota;
 use App\Transaksi;
+use App\DetailTransaksi;
 use Carbon\Carbon;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Repositories\DetailTransaksiRepositoryInterface;
 class TransaksiController extends Controller
 {
+    public function __construct(DetailTransaksiRepositoryInterface $model, Buku $book, DetailTransaksi $detail)
+    {
+        $this->model  = $model;
+        $this->buku = $book;
+        $this->detail = $detail;
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         if(Auth::user()->level == 'user')
@@ -36,7 +38,7 @@ class TransaksiController extends Controller
         } else {
             $datas = Transaksi::get();
         }
-        return view('transaksi.index', compact('datas'));
+        return view('peminjaman.index', compact('datas'));
     }
 
     /**
@@ -46,7 +48,6 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        
         $getRow = Transaksi::orderBy('id', 'DESC')->get();
         $rowCount = $getRow->count();
         
@@ -68,9 +69,9 @@ class TransaksiController extends Controller
             }
         }
 
-        $bukus = Buku::where('jumlah_buku', '>', 0)->get();
         $anggotas = Anggota::get();
-        return view('transaksi.create', compact('bukus', 'kode', 'anggotas'));
+        $buku = Buku::all();
+        return view('peminjaman.create', compact('kode', 'anggotas','buku'));
     }
 
     /**
@@ -81,32 +82,40 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'kode_transaksi' => 'required|string|max:255',
             'tgl_pinjam' => 'required',
             'tgl_kembali' => 'required',
-            'buku_id' => 'required',
             'anggota_id' => 'required',
 
         ]);
-
         $transaksi = Transaksi::create([
-                'kode_transaksi' => $request->get('kode_transaksi'),
-                'tgl_pinjam' => $request->get('tgl_pinjam'),
-                'tgl_kembali' => $request->get('tgl_kembali'),
-                'buku_id' => $request->get('buku_id'),
-                'anggota_id' => $request->get('anggota_id'),
-                'ket' => $request->get('ket'),
-                'status' => 'pinjam'
-            ]);
+            'kode_transaksi' => $request->get('kode_transaksi'),
+            'tgl_pinjam' => $request->get('tgl_pinjam'),
+            'tgl_kembali' => $request->get('tgl_kembali'),
+            'anggota_id' => $request->get('anggota_id'),
+            'ket' => $request->get('ket'),
+            'status' => 'pinjam'
+        ]);
 
-        $transaksi->buku->where('id', $transaksi->buku_id)
-                        ->update([
-                            'jumlah_buku' => ($transaksi->buku->jumlah_buku - 1),
-                            ]);
+        $bukus = $request->buku;
 
-        return redirect()->route('transaksi.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
+        if($transaksi){
 
+            foreach ($bukus as $buku) {
+
+                
+                $detail = new DetailTransaksi();
+                $detail->transaksi_id = $transaksi->id;
+                $detail->buku_id = $buku;
+                $save[] = $detail;
+                
+            }
+        }
+        $transaksi->detail()->saveMany($save);
+
+        return redirect()->route('peminjaman.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
     }
 
     /**
@@ -117,18 +126,23 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-
-        $data = Transaksi::findOrFail($id);
-
-
         if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
                 Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
                 return redirect()->to('/');
         }
 
+        $data   = Transaksi::findOrFail($id);
+        $datas = DetailTransaksi::select(
+                                        "buku.judul"
+                                    )
+                                    ->join("buku", "detailtransaksi.buku_id", "=", "buku.id")
+                                    ->join("transaksi", "detailtransaksi.transaksi_id", "=", "transaksi.id")
+                                    ->where('transaksi.id', $id)
+                                    ->get();
 
-        return view('transaksi.show', compact('data'));
+        return view('peminjaman.show', compact('data','datas'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -137,7 +151,7 @@ class TransaksiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $data = Transaksi::findOrFail($id);
 
         if((Auth::user()->level == 'user') && (Auth::user()->anggota->id != $data->anggota_id)) {
@@ -145,6 +159,7 @@ class TransaksiController extends Controller
                 return redirect()->to('/');
         }
 
+        
         return view('buku.edit', compact('data'));
     }
 
@@ -158,17 +173,18 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         $transaksi = Transaksi::find($id);
-
+        $transaksis = DetailTransaksi::find($id);
         $transaksi->update([
                 'status' => 'kembali'
                 ]);
 
-        $transaksi->buku->where('id', $transaksi->buku->id)
+        $transaksis->buku->where('id', $transaksis->buku_id)
                         ->update([
-                            'jumlah_buku' => ($transaksi->buku->jumlah_buku + 1),
+                            'jumlah_buku' => ($transaksis->buku->jumlah_buku + 3),
                             ]);
-
-        return redirect()->route('transaksi.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
+                            
+        alert()->success('Berhasil.','Data telah diubah!');
+        return redirect()->route('peminjaman.index');
     }
 
     /**
@@ -180,6 +196,7 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         Transaksi::find($id)->delete();
-        return redirect()->route('transaksi.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
+        alert()->success('Berhasil.','Data telah dihapus!');
+        return redirect()->route('peminjaman.index');
     }
 }

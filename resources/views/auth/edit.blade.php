@@ -25,8 +25,6 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
         
-        
-
         var check = function() {
             if (document.getElementById('password').value ==
                 document.getElementById('confirm_password').value) {

@@ -138,14 +138,15 @@ $(document).ready(function() {
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('lokasi') ? ' has-error' : '' }}">
-                                <label for="lokasi" class="col-md-4 control-label">Lokasi</label>
+                            <div class="form-group{{ $errors->has('rak_id') ? ' has-error' : '' }}">
+                                <label for="rak_id" class="col-md-4 control-label">Lokasi Buku (Rak)</label>
                                 <div class="col-md-6">
-                                <select class="form-control" name="lokasi" disabled="">
-                                    <option value="rak1" {{$data->lokasi === "rak1" ? "selected" : ""}}>Rak 1</option>
-                                    <option value="rak2" {{$data->lokasi === "rak2" ? "selected" : ""}}>Rak 2</option>
-                                    <option value="rak3" {{$data->lokasi === "rak3" ? "selected" : ""}}>Rak 3</option>
-                                </select>
+                                    <input id="rak_id" type="text" class="form-control" name="rak_id" value="{{ $data->rak->lokasi }}" readonly>
+                                    @if ($errors->has('rak_id'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('rak_id') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                             <a href="{{route('buku.index')}}" class="btn btn-danger pull-right">Kembali</a>

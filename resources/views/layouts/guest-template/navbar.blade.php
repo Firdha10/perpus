@@ -7,7 +7,6 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto ml-lg-3 align-items-lg-center">
                 <li class="nav-item"><a href="{{url('/')}}" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="{{url('/daftar')}}" class="nav-link">Registrations</a></li>
                 <li class="nav-item"><a href="{{url('/faqs')}}" class="nav-link">FAQ</a></li>
                 <li class="nav-item d-lg-none d-md-block"><a href="{{ route('login') }}" class="nav-link smooth" target="_blank">Login</a></li>
             </ul>

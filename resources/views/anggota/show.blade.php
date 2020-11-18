@@ -101,6 +101,17 @@ $(document).ready(function() {
                                 @endif
                             </div>
                         </div>
+                        <div class="form-group{{ $errors->has('created_at') ? ' has-error' : '' }}">
+                            <label for="created_at" class="col-md-4 control-label">Tanggal Ditambahkan</label>
+                            <div class="col-md-6">
+                                <input id="created_at" type="text" class="form-control" name="created_at" value="{{ $data->created_at }}" required readonly="">
+                                @if ($errors->has('created_at'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('created_at') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <a href="{{route('anggota.index')}}" class="btn btn-danger pull-right">Kembali</a>
                     </div>
                   </div>

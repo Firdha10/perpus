@@ -7,7 +7,7 @@ use App\Transaksi;
 use App\Anggota;
 use App\Buku;
 use Auth;
-
+use DB;
 
 class HomeController extends Controller
 {
@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         $transaksi = Transaksi::get();
         $anggota   = Anggota::get();
-        $buku      = Buku::get();
+        $buku      = DB::table('buku')->sum('buku.jumlah_buku'); 
         if(Auth::user()->level == 'user')
         {
             $datas = Transaksi::where('status', 'pinjam')

@@ -52,7 +52,7 @@
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <a href="{{url('format_buku')}}" class="btn btn-xs btn-primary float-right"> <i class="fas fa-print"></i>Cetak</a>
+        <h4 class="card-title pull-right">Jumlah Buku : {{$buku}}</h4>
         <h4 class="card-title pull-left">Data Buku</h4>
         <div class="table-responsive">
           <table class="table table-striped" id="table">

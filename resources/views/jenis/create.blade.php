@@ -14,7 +14,7 @@ $(document).ready(function() {
     Tambah Jenis Buku
 @endsection
 @section('content')
-<form method="POST" action="{{ route('jenisbuku.store') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('jenis.store') }}" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-md-12 d-flex align-items-stretch grid-margin">
@@ -37,7 +37,7 @@ $(document).ready(function() {
                             <button type="submit" class="btn btn-primary" id="submit">
                                 Simpan
                             </button>
-                            <a href="{{route('jenisbuku.index')}}" class="btn btn-danger">Kembali</a>
+                            <a href="{{route('jenis.index')}}" class="btn btn-danger">Kembali</a>
                         </div>
                     </div>
                 </div>

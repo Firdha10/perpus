@@ -18,11 +18,11 @@ class JenisBukuController extends Controller
     {
         if(Auth::user()->level == 'user') {
             Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-            return redirect()->to('/');
+            return redirect()->to('/home');
         }
     
         $datas = JenisBuku::get();
-        return view('jenisbuku.index', compact('datas'));
+        return view('jenis.index', compact('datas'));
     }
 
     /**
@@ -37,7 +37,7 @@ class JenisBukuController extends Controller
             return redirect()->to('/');
         }
 
-        return view('jenisbuku.create');
+        return view('jenis.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class JenisBukuController extends Controller
         if($count>0){
             Session::flash('message', 'Already exist!');
             Session::flash('message_type', 'danger');
-            return redirect()->to('jenisbuku');
+            return redirect()->to('jenis');
         }
 
         $this->validate($request, [
@@ -62,7 +62,7 @@ class JenisBukuController extends Controller
 
         JenisBuku::create($request->all());
 
-        return redirect()->route('jenisbuku.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
+        return redirect()->route('jenis.index')->with(['message' => 'Berhasil Menambah Data', 'type' => 'success']);
     }
 
     /**
@@ -90,7 +90,7 @@ class JenisBukuController extends Controller
         }
 
         $data = JenisBuku::findOrFail($id);
-        return view('jenisbuku.edit', compact('data'));
+        return view('jenis.edit', compact('data'));
     }
 
     /**
@@ -114,7 +114,7 @@ class JenisBukuController extends Controller
              'jenis_buku' => $request->get('jenis_buku')
         ]);
         
-        return redirect()->route('jenisbuku.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
+        return redirect()->route('jenis.index')->with(['message' => 'Berhasil Mengubah Data', 'type' => 'success']);
     }
 
     /**
@@ -126,6 +126,6 @@ class JenisBukuController extends Controller
     public function destroy($id)
     {
         JenisBuku::find($id)->delete();
-        return redirect()->route('jenisbuku.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
+        return redirect()->route('jenis.index')->with(['message' => 'Berhasil Menghapus Data', 'type' => 'success']);
     }
 }
