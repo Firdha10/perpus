@@ -14,7 +14,9 @@
 @endsection
 @section('content')
 <div class="row">
-
+  <div class="col-lg-12">
+    @include('layouts.alert-messages')
+  </div>
 </div>
 <div class="row" style="margin-top: 20px;">
 <div class="col-lg-12 grid-margin stretch-card">

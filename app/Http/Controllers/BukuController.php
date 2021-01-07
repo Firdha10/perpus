@@ -32,9 +32,7 @@ class BukuController extends Controller
 
     public function index()
     {
-        if(Auth::user()->level == 'user') {
-            Alert::info('Oopss..', 'Anda dilarang masuk ke area ini.');
-            return redirect()->to('/');
+        if(Auth::user()->level == 'user') { 
         }
         $buku      = DB::table('buku')->sum('buku.jumlah_buku'); 
         $datas = Buku::get();

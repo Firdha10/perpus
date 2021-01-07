@@ -64,15 +64,17 @@
     Data Peminjaman
 @endsection
 @section('content')
-  <div class="row">
-    <div class="col-lg-2">
-      <a href="{{ route('peminjaman.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Peminjaman</a>
+  @if(Auth::user()->level == 'admin')
+    <div class="row">
+      <div class="col-lg-2">
+        <a href="{{ route('peminjaman.create') }}" class="btn btn-primary btn-rounded btn-fw"><i class="fa fa-plus"></i> Tambah Peminjaman</a>
+      </div>
+      <br><br>
+      <div class="col-lg-12">
+        @include('layouts.alert-messages')
+      </div>
     </div>
-    <br><br>
-    <div class="col-lg-12">
-      @include('layouts.alert-messages')
-    </div>
-  </div>
+  @endif
   <div class="row" style="margin-top: 20px;">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
@@ -126,15 +128,9 @@
                               <a href="{{route('peminjaman.show', $data->id)}}" class="btn btn-success text-white btn-sm"><i class="fas fa fa-file"></i></a>
                             </div>
                         @else
-                          @if($data->status == 'pinjam')
-                            <form action="{{ route('peminjaman.update', $data->id) }}" method="post" enctype="multipart/form-data" class="edit_form">
-                              {{ csrf_field() }}
-                              {{ method_field('put') }}
-                              <button class="btn btn-info btn-xs">Sudah Kembali</button>
-                            </form>
-                          @else
-                            -
-                          @endif
+                          <div class="btn-group">
+                            <a href="{{route('peminjaman.show', $data->id)}}" class="btn btn-success text-white btn-sm"><i class="fas fa fa-file"></i></a>
+                          </div>
                         @endif
                       </td>
                     </tr>

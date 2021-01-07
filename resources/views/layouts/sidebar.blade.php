@@ -50,14 +50,6 @@
         <span class="menu-title">Data Rak</span>
       </a>
     </li>
-  @endif
-  <li class="menu-header">Peminjaman</li>
-  <li class="nav-item {{ setActive(['peminjaman*']) }}">
-    <a class="nav-link" href="{{route('peminjaman.index')}}">
-      <i class="menu-icon mdi mdi-cash"></i>
-      <span class="menu-title">Data Peminjaman</span>
-    </a>
-  </li>
   <li class="menu-header">Laporan</li>
   <li class="nav-item">
     <a class="nav-link" data-toggle="collapse" href="#ui-laporan" aria-expanded="false" aria-controls="ui-laporan">
@@ -75,5 +67,13 @@
         </li>
       </ul>
     </div>
+  </li>
+  @endif
+  <li class="menu-header">Peminjaman</li>
+  <li class="nav-item {{ setActive(['peminjaman*']) }}">
+    <a class="nav-link" href="{{route('peminjaman.index')}}">
+      <i class="menu-icon mdi mdi-cash"></i>
+      <span class="menu-title">Data Peminjaman</span>
+    </a>
   </li>
 </ul>
